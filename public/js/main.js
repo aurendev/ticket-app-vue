@@ -19658,8 +19658,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     var calculateQueue = function calculateQueue() {
-      var queue1Minutes = queue1.value.length * 2;
-      var queue2Minutes = queue2.value.length * 3;
+      var timeElapsedFirstItemQ1 = queue1.value.length > 0 ? dayjs__WEBPACK_IMPORTED_MODULE_3___default()().diff(dayjs__WEBPACK_IMPORTED_MODULE_3___default()(queue1.value[0].created_at), "minutes") : 0;
+      var timeElapsedFirstItemQ2 = queue2.value.length > 0 ? dayjs__WEBPACK_IMPORTED_MODULE_3___default()().diff(dayjs__WEBPACK_IMPORTED_MODULE_3___default()(queue2.value[0].created_at), "minutes") : 0;
+      var queue1Minutes = queue1.value.length * 2 * 60 - timeElapsedFirstItemQ1;
+      var queue2Minutes = queue2.value.length * 3 * 60 - timeElapsedFirstItemQ2;
       return queue2Minutes >= queue1Minutes ? 1 : 2;
     };
 
@@ -19797,7 +19799,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mx-[20%]"
+  "class": "mx-2 lg:mx-[20%]"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -19839,7 +19841,7 @@ var _hoisted_11 = {
   "class": "col-span-12 italic text-xl text-center"
 };
 var _hoisted_12 = {
-  "class": "col-span-3"
+  "class": "col-span-12 md:col-span-6 xl:col-span-3"
 };
 var _hoisted_13 = {
   "class": "col-span-12 p-4 border rounded-md grid grid-cols-12 gap-2 mt-8"
@@ -19856,13 +19858,14 @@ var _hoisted_15 = {
   "class": "col-span-12 italic text-xl text-center"
 };
 var _hoisted_16 = {
-  "class": "col-span-3"
+  "class": "col-span-12 md:col-span-6 xl:col-span-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("main", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"])
+    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"]),
+    "class": "flex flex-col w-full lg:flex-row lg:justify-around"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "outline-none rounded-sm border mr-3 text-gray-600",
+    "class": "outline-none rounded-sm border mb-2 lg:mb-0 lg:mr-3 text-gray-600 lg:w-[35%] py-1 px-2",
     placeholder: "Id",
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -19871,7 +19874,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.uuid]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "outline-none rounded-sm border mr-3 text-gray-600",
+    "class": "rounded-sm border mb-2 lg:mb-0 lg:mr-3 text-gray-600 lg:w-[35%] py-1 px-2",
     placeholder: "Nombre",
     type: "text",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -19881,7 +19884,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     disabled: !$setup.isValid,
-    "class": "px-4 py-1 rounded-md bg-green-400 disabled:bg-gray-400"
+    "class": "px-4 py-2 rounded-md bg-green-400 disabled:bg-gray-400 lg:w-[20%]"
   }, [!$setup.isCreating ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, "Agregar")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Loader"], {
     key: 1
   }))], 8
@@ -19926,7 +19929,7 @@ var _hoisted_1 = {
   "class": "border-gray-200 border rounded-md p-2"
 };
 var _hoisted_2 = {
-  "class": "flex items-center"
+  "class": "flex items-center flex-wrap"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Id : ", -1
@@ -19936,7 +19939,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
 
 var _hoisted_5 = {
-  "class": "flex items-center"
+  "class": "flex items-center flex-wrap"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Nombre :", -1

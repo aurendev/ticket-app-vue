@@ -74,8 +74,12 @@ const onSubmit = async () => {
 };
 
 const calculateQueue = () => {
-  let queue1Minutes = queue1.value.length * 2;
-  let queue2Minutes = queue2.value.length * 3;
+  let timeElapsedFirstItemQ1 = queue1.value.length> 0?  dayjs().diff(dayjs(queue1.value[0].created_at), "minutes") : 0
+
+  let timeElapsedFirstItemQ2 =  queue2.value.length> 0?  dayjs().diff(dayjs(queue2.value[0].created_at), "minutes"):0
+
+  let queue1Minutes = ((queue1.value.length * 2) * 60) - timeElapsedFirstItemQ1;
+  let queue2Minutes = ((queue2.value.length * 3) * 60) - timeElapsedFirstItemQ2;
 
   return queue2Minutes >= queue1Minutes ? 1 : 2;
 };
@@ -106,27 +110,27 @@ const deleteTicket = async (ticketIds) => {
 </script>
 
 <template>
-  <main class="mx-[20%]">
+  <main class="mx-2 lg:mx-[20%]">
     <div class="text-3xl text-white w-full text-center mt-8 font-bold">Ticket-App</div>
     <div class="grid grid-cols-12 p-8 text-white">
       <!-- form -->
       <div class="rounded-md border p-4 col-span-12">
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent="onSubmit" class="flex flex-col w-full lg:flex-row lg:justify-around">
           <input
-            class="outline-none rounded-sm border mr-3 text-gray-600"
+            class="outline-none rounded-sm border mb-2 lg:mb-0 lg:mr-3 text-gray-600 lg:w-[35%] py-1 px-2 "
             placeholder="Id"
             type="text"
             v-model="form.uuid"
           />
           <input
-            class="outline-none rounded-sm border mr-3 text-gray-600"
+            class=" rounded-sm border mb-2 lg:mb-0 lg:mr-3 text-gray-600 lg:w-[35%] py-1 px-2 "
             placeholder="Nombre"
             type="text"
             v-model="form.name"
           />
           <button
             :disabled="!isValid"
-            class="px-4 py-1 rounded-md bg-green-400 disabled:bg-gray-400"
+            class="px-4 py-2 rounded-md bg-green-400 disabled:bg-gray-400 lg:w-[20%] "
           >
             <span v-if="!isCreating">Agregar</span>
             <Loader v-else />
@@ -146,7 +150,7 @@ const deleteTicket = async (ticketIds) => {
         <div v-if="queue1.length === 0" class="col-span-12 italic text-xl text-center">
           No hay ningun ticket
         </div>
-        <div v-for="ticket in queue1" class="col-span-3">
+        <div v-for="ticket in queue1" class="col-span-12 md:col-span-6 xl:col-span-3">
           <Card :ticket="ticket" />
         </div>
       </section>
@@ -156,7 +160,7 @@ const deleteTicket = async (ticketIds) => {
         <div v-if="queue2.length === 0" class="col-span-12 italic text-xl text-center">
           No hay ningun ticket
         </div>
-        <div v-for="ticket in queue2" class="col-span-3">
+        <div v-for="ticket in queue2" class="col-span-12 md:col-span-6 xl:col-span-3">
           <Card :ticket="ticket" />
         </div>
       </section>

@@ -12,8 +12,8 @@
 
 <template>
   <div class="border-gray-200 border rounded-md p-2">
-    <div class="flex items-center"><b>Id : </b> <i>{{ ticket.uuid }}</i></div>
-    <div class="flex items-center"><b>Nombre :</b> <i>{{ ticket.name }}</i></div>
+    <div class="flex items-center flex-wrap"><b>Id : </b> <i>{{ ticket.uuid }}</i></div>
+    <div class="flex items-center flex-wrap"><b>Nombre :</b> <i>{{ ticket.name }}</i></div>
   </div>
 </template>
 
